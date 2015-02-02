@@ -1,0 +1,16 @@
+{% if latest_punchlist_list %}
+	<table class="punchlisttable">
+		<tr>
+			<th>Date Created</th>
+			<th>Punchlist</th>
+		</tr>
+    	{% for punchlist in latest_punchlist_list %}
+		<tr>
+			<td>{{ punchlist.punchlist_date|date:"m/d/Y" }}</td>
+			<td><a href="/punchlists/{{ punchlist.id }}/">{{ punchlist.punchlist_name }}</a></td>
+		</tr>
+    	{% endfor %}
+	</table>
+{% else %}
+    <p>No punchlists are available.</p>
+{% endif %}

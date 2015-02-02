@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load staticfiles %}
+
+    <script src="{% static 'punchlists/js/jquery-1.11.2.min.js' %}"></script>
+    <script src="{% static 'punchlists/js/issues.js' %}"></script>
+
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'punchlists/css/style.css' %}" />
+
+    <title>{% block title %}Punchlists | {{ section.title }}{% endblock %}</title>
+</head>
+
+<body>
+    <div class="container">
+        <div id="menu">
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/punchlists/">Punchlists</a></li>
+            </ul>
+        </div>
+
+        <div id="content">
+            {% block content %}{% endblock %}
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,127 @@
+html {
+  box-sizing: border-box;
+}
+
+body{
+	margin:0px;
+	padding:0px;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	line-height:16px;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+.container{
+	margin:0px auto;
+	width:100%;
+}
+
+#menu{
+	width: 100%;
+	text-align: center;
+	height: 100px;
+	background-color: #0d83dd;
+	border-bottom: 5px solid #106fb6;
+	position: relative;
+}
+#menu ul{
+	margin: 0px;
+	padding: 0px;
+	list-style: none;
+	bottom: 0;
+	position: absolute;
+	left: 40%;
+} 
+#menu ul li{
+	display:inline-block;
+	font-size:18px;
+	padding-right:80px;
+	padding-bottom:20px;
+}
+
+#menu a{color:#fff; text-decoration:none;}
+#menu a:visited{color:#fff; text-decoration:none;}
+#menu a:hover{color:#fff; text-decoration:none;}
+
+#content{
+	padding:0px 20px 0px 20px;
+}
+
+table.issuelist{
+	border-left:1px solid #333;
+	border-right:1px solid #333;
+	border-top:1px solid #333;
+	width:100%;
+	margin-bottom:80px;
+}
+
+table.issuelist tr td, table.issuelist tr th{
+	border-bottom:1px solid #333;
+	padding:10px;
+}
+
+table.issuelist tr.even td{
+	background-color:#fff;
+}
+
+table.issuelist tr.odd td{
+	background-color:#e5f2fb;
+}
+
+
+table.issuelist tr.ready-for-review td{
+	background-color:#dfd;
+}
+table.issuelist tr.question td{
+	background-color:#f4f379;
+}
+
+.issuelist textarea{
+	width:100%;
+	height:100px;
+}
+
+.hiddennote{
+	display:none;
+}
+
+.iconcell{
+	width:110px;
+}
+.iconcell a{
+	width:30px;
+	text-align: center;
+	float:left;
+}
+
+.issuelist a .fa-check,
+.issuelist a .fa-question,
+.issuelist a .fa-thumbs-up{
+	padding:5px;
+}
+
+.issuelist a .fa-stack-1x{padding:0px;}
+
+.issuelist a .fa-check{color:#659c17;}
+.issuelist a:visited .fa-check{color:#659c17;}
+.issuelist a:hover .fa-check{color:#659c17;}
+
+.issuelist a .text-danger{color:#a94442;}
+.issuelist a:visited .text-danger{color:#a94442;}
+.issuelist a:hover .text-danger{color:#a94442;}
+
+.issuelist a .fa-thumbs-up{color:#000;}
+.issuelist a:visited .fa-thumbs-up{color:#000;}
+.issuelist a:hover .fa-thumbs-up{color:#000;}
+
+.issuelist a .fa-question{color:#000;}
+.issuelist a:visited .fa-question{color:#000;}
+.issuelist a:hover .fa-question{color:#000;}
+
+
+
+
+

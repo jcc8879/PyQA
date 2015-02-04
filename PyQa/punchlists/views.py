@@ -74,3 +74,21 @@ def set_issue_as_complete(request, punchlist_id, issue_id):
 
 def set_issue_as_new(request, punchlist_id, issue_id):
 	return HttpResponse("Ok you're marking this issue as new (taking it's setting off basically):  %s." % issue_id)
+
+def add_note(request, punchlist_id, issue_id):
+	notes 			= request.POST['notes']
+	issue_for_note  = Issue.objects.get(pk=issue_id)
+
+	if notes:
+		note = issue_for_note.notes_set.create(note=notes)
+
+	response = "200"
+
+	return HttpResponse(response)
+
+def delete_issue(request, punchlist_id, issue_id):
+	issue_for_deletion = Issue.objects.get(pk=issue_id)
+
+	issue_for_deletion.delete()
+
+	return HttpResponseRedirect(reverse('punchlists:issues', args=(punchlist_id,)))

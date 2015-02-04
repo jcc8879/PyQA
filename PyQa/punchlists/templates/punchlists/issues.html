@@ -2,77 +2,87 @@
 
 {% block content %}
 <h1>{{ punchlist.punchlist_name }}</h1>
-<table class="issuelist" cellpadding="0" cellspacing="0">
-	<tr>
-		<th>Reported</th>
-		<th>Status</th>
-		<th>Issue</th>
-		<th>URL</th>
-		<th>Browser</th>
-		<th>OS</th>
-		<th>Reporter</th>
-		<th>Notes</th>
-		<th>&nbsp;</th>
-	</tr>
+
+<div class="issues">
 {% if punchlist.issue_set %}
 	{% for issue in punchlist.get_incomplete_issues %}
-	<tr class="{{ issue.status|slugify }} {% cycle 'even' 'odd' %}">
-		<td>{{ issue.reported_date|date:"m/d/y" }}</td>
-		<td>{{ issue.status }}</td>
-		<td>{{ issue.issue_text }}</td>
-		<td><a href="{{ issue.url }}" target="_blank" title="{{ issue.url }}">{{ issue.url|truncatechars:100 }}</a></td>
-		<td>{{ issue.browser }}</td>
-		<td>{{ issue.os }}</td>
-		<td>{{ issue.reporter }}</td>
-		<td class="notecell">
-			<span class="latestnote">{{ issue.get_latest_note }}</span>
-			<textarea class="hiddennote" name="notes" id="notes" cols="30" rows="10">{{ issue.get_latest_note }}</textarea>
-		</td>
-		<td class="iconcell">
-			{% if issue.status.status_text == "Ready for Review" %}
-				<a href="issue/notcomplete/{{ issue.id }}" title="Mark as Not Complete" alt="Mark as Not Complete"><span class="fa-stack fa"><i class="fa fa-check fa-stack-1x"></i><i class="fa fa-ban fa-stack-2x text-danger"></i></span></a>
+	<div class="issue {{ issue.status|slugify }} {% cycle 'even' 'odd' %}">
+		<div class="issueheader">
+			<div class="issuedate">{{ issue.reported_date|date:"m/d/y" }}</div>
+			<div class="issuepriority">{{ issue.status }}</div>
+			<div class="issuereporter">{{ issue.reporter }}</div>
+			<div class="issueos">{{ issue.os }}</div>
+			<div class="issuebrowser">{{ issue.browser }}</div>
+			<div class="issueactions">
+				{% if issue.status.status_text == "Ready for Review" %}
+					<a href="issue/notcomplete/{{ issue.id }}" title="Mark as Not Complete" alt="Mark as Not Complete"><span class="fa-stack fa"><i class="fa fa-check fa-stack-1x"></i><i class="fa fa-ban fa-stack-2x text-danger"></i></span></a>
+				{% else %}
+					<a href="issue/review/{{ issue.id }}" title="Mark as Ready for Review" alt="Mark as Ready for Review"><i class="fa fa-check"></i></a>
+				{% endif %}
+				<a href="issue/question/{{ issue.id }}" title="Mark as Questioned" alt="Mark as Questioned"><i class="fa fa-question"></i></a>
+				<a href="issue/complete/{{ issue.id }}" title="Mark as Complete" alt="Mark as Complete"><i class="fa fa-thumbs-up"></i></a>
+				<a href="issue/delete/{{ issue.id }}" title="Delete" alt="Delete"><i class="fa fa-trash-o"></i></a>
+			</div>
+		</div>
+		<div class="issuetext">
+			<strong>Issue:</strong><br />
+			{{ issue.issue_text }}
+		</div>
+		<div class="issuenote">
+			<strong class="latestnote">Notes: </strong><br />
+			{% if issue.get_latest_note %}
+				<span class="latestnote">{{ issue.get_latest_note }}</span>
 			{% else %}
-				<a href="issue/review/{{ issue.id }}" title="Mark as Ready for Review" alt="Mark as Ready for Review"><i class="fa fa-check"></i></a>
+				<span class="latestnote"><em>(click here to add note)</em></span>
 			{% endif %}
-			<a href="issue/question/{{ issue.id }}" title="Mark as Questioned" alt="Mark as Questioned"><i class="fa fa-question"></i></a>
-			<a href="issue/complete/{{ issue.id }}" title="Mark as Complete" alt="Mark as Complete"><i class="fa fa-thumbs-up"></i></a>
-		</td>
-	</tr>
+			<form method="post">{% csrf_token %}<input type="hidden" class="issue_id" name="issue_id" value="{{ issue.id }}" /><textarea class="hiddennote" name="notes" id="notes" cols="30" rows="10">{{ issue.get_latest_note }}</textarea></form>
+		</div>
+	</div>
 	{% endfor %}
 {% endif %}
-	<form action="{% url 'punchlists:reportissue' punchlist.id %}" method="post">
+</div>
+
+<form action="{% url 'punchlists:reportissue' punchlist.id %}" method="post">
 	{% csrf_token %}
-	<tr>
-		<td>&nbsp;</td>
-		<td>&nbsp;</td>
-		<td valign="top"><textarea name="issue_text" id="issue_text" cols="30" rows="10"></textarea></td>
-		<td valign="top"><input type="text" name="url" id="url" value=""></td>
-		<td valign="top">
-			<select name="browser_id">
-			{% for browser in browsers %}
-			    <option value="{{ browser.id }}">{{ browser.browser_name }}</option>
-			{% endfor %}
-			</select>
-		</td>
-		<td valign="top">
-			<select name="os_id">
-			{% for o in oses %}
-			    <option value="{{ o.id }}">{{ o.os_name }}</option>
-			{% endfor %}
-			</select>
-		</td>
-		<td valign="top">
-			<select name="reporter_id">
-			{% for reporter in reporters %}
-			    <option value="{{ reporter.id }}">{{ reporter.reporter_name }}</option>
-			{% endfor %}
-			</select>
-		</td>
-		<td valign="top"><textarea name="notes" id="notes" cols="30" rows="10"></textarea></td>
-		<td><input type="submit" value="Report" /></td>
-	</tr>
-	</form>
-</table>
+	<table class="issuelist" cellpadding="0" cellspacing="0">
+		<tr>
+			<th>Issue</th>
+			<th>URL</th>
+			<th>Browser</th>
+			<th>OS</th>
+			<th>Reporter</th>
+			<th>Notes</th>
+			<th>&nbsp;</th>
+		</tr>
+		<tr>
+			<td valign="top"><textarea name="issue_text" id="issue_text" cols="30" rows="10"></textarea></td>
+			<td valign="top"><input type="text" name="url" id="url" value=""></td>
+			<td valign="top">
+				<select name="browser_id">
+				{% for browser in browsers %}
+				    <option value="{{ browser.id }}">{{ browser.browser_name }}</option>
+				{% endfor %}
+				</select>
+			</td>
+			<td valign="top">
+				<select name="os_id">
+				{% for o in oses %}
+				    <option value="{{ o.id }}">{{ o.os_name }}</option>
+				{% endfor %}
+				</select>
+			</td>
+			<td valign="top">
+				<select name="reporter_id">
+				{% for reporter in reporters %}
+				    <option value="{{ reporter.id }}">{{ reporter.reporter_name }}</option>
+				{% endfor %}
+				</select>
+			</td>
+			<td valign="top"><textarea name="notes" id="notes" cols="30" rows="10"></textarea></td>
+			<td><input type="submit" value="Report" /></td>
+		</tr>
+	</table>
+</form>
 
 
 <h2>Completed</h2>

@@ -50,6 +50,86 @@ body{
 	padding:0px 20px 0px 20px;
 }
 
+.issues{
+	float:left;
+	width:100%;
+	border:1px solid #333;
+	border-bottom:none;
+}
+
+.issue{
+	float:left;
+	width:100%;
+	border-bottom:1px solid #333;
+}
+
+.issue.even{
+	background-color:#fff;
+}
+
+.issue.odd{
+	background-color:#fff;
+}
+
+
+.issue.ready-for-review{
+	background-color:#dfd;
+}
+.issue.question{
+	background-color:#f4f379;
+}
+.issueheader{
+	float:left;
+	width:100%;
+	border-bottom:1px dashed #333;
+	padding:10px;
+	position:relative;
+}
+.issuedate{
+	float:left;
+	margin-right:10px;
+	font-style:italic;
+	width:65px;
+}
+.issuepriority{
+	float:left;
+	margin-right:10px;
+	font-weight:bold;
+	width:150px;
+}
+.issuereporter{
+	float:left;
+	margin-right:10px;
+	width:100px;
+}
+.issueactions{
+	position:absolute;
+	top:5px;
+	right:10px;
+}
+
+.issueos{
+	float:left;
+	margin-right:10px;
+}
+
+.issuebrowser{
+	float:left;
+}
+
+.issuetext{
+	float:left;
+	width:100%;
+	padding:10px;
+}
+.issuenote{
+	float:left;
+	width:100%;
+	padding:10px;
+}
+
+
+
 table.issuelist{
 	border-left:1px solid #333;
 	border-right:1px solid #333;
@@ -91,35 +171,40 @@ table.issuelist tr.question td{
 .iconcell{
 	width:110px;
 }
-.iconcell a{
+.issueactions a{
 	width:30px;
 	text-align: center;
 	float:left;
 }
 
-.issuelist a .fa-check,
-.issuelist a .fa-question,
-.issuelist a .fa-thumbs-up{
+.issueactions a .fa-check,
+.issueactions a .fa-question,
+.issueactions a .fa-thumbs-up,
+.issueactions a .fa-trash-o{
 	padding:5px;
 }
 
-.issuelist a .fa-stack-1x{padding:0px;}
+.issueactions a .fa-stack-1x{padding:0px;}
 
-.issuelist a .fa-check{color:#659c17;}
-.issuelist a:visited .fa-check{color:#659c17;}
-.issuelist a:hover .fa-check{color:#659c17;}
+.issueactions a .fa-check{color:#659c17;}
+.issueactions a:visited .fa-check{color:#659c17;}
+.issueactions a:hover .fa-check{color:#659c17;}
 
-.issuelist a .text-danger{color:#a94442;}
-.issuelist a:visited .text-danger{color:#a94442;}
-.issuelist a:hover .text-danger{color:#a94442;}
+.issueactions a .text-danger{color:#a94442;}
+.issueactions a:visited .text-danger{color:#a94442;}
+.issueactions a:hover .text-danger{color:#a94442;}
 
-.issuelist a .fa-thumbs-up{color:#000;}
-.issuelist a:visited .fa-thumbs-up{color:#000;}
-.issuelist a:hover .fa-thumbs-up{color:#000;}
+.issueactions a .fa-thumbs-up{color:#000;}
+.issueactions a:visited .fa-thumbs-up{color:#000;}
+.issueactions a:hover .fa-thumbs-up{color:#000;}
 
-.issuelist a .fa-question{color:#000;}
-.issuelist a:visited .fa-question{color:#000;}
-.issuelist a:hover .fa-question{color:#000;}
+.issueactions a .fa-question{color:#000;}
+.issueactions a:visited .fa-question{color:#000;}
+.issueactions a:hover .fa-question{color:#000;}
+
+.issueactions a .fa-trash-o{color:#a94442;}
+.issueactions a:visited .fa-trash-o{color:#a94442;}
+.issueactions a:hover .fa-trash-o{color:#a94442;}
 
 
 
